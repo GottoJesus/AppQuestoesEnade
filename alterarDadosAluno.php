@@ -6,14 +6,13 @@
 include 'src/dao/ToolsDAO.php';
 @session_start();
 
-unset($_SESSION['arrAluno']);
 $raAluno = $_GET['ra'];
 $_SESSION['raAluno'] = $raAluno;
 $_SESSION['nomeAluno'] = $_GET['nomeAluno'];
 
 $toolsDAO = new ToolsDAO();
 
-$curso = $toolsDAO->findById($_SESSION['curso']);
+$semestre = $toolsDAO->findSemestre($_GET['ra']);
 ?>
 </head>
 <body>
@@ -25,8 +24,8 @@ $curso = $toolsDAO->findById($_SESSION['curso']);
           <div class="grid_12">
             <div class="wrap pad-3" style="border:4px solid; border-bottom-right-radius: 12px; border-bottom-left-radius: 12px; 
             background-color: #EDECEB; text-align: center;">
-            <h3 class="p3" style="font-size:medium; font-family: sans-serif; color: #B63D32; font-weight: bold;">Por favor preencha o campo abaixo para consultar as Questões: </h3>
-				<form method="post" action="src/listarQuestoes.php">
+            <h3 class="p3" style="font-size:medium; font-family: sans-serif; color: #B63D32; font-weight: bold;">Por favor preencha o campo abaixo para alterar o Semestre do Aluno: </h3>
+				<form method="post" action="src/alterarDadosAluno.php">
 					<table style="width: 100%;">
 						<tbody>
 						
@@ -41,21 +40,30 @@ $curso = $toolsDAO->findById($_SESSION['curso']);
 							</tr>
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label style="color: #B63D32;">Curso: </label></b></td>
-								<td style="width: 75%; text-align: left;"><?php echo $curso;?></td>
+								<td style="width: 75%; text-align: left;"><?php echo $_GET['curso'];?></td>
 							</tr>
 							<tr>
-								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="ano" style="color: #B63D32;">Ano: </label></b></td>
+								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label style="color: #B63D32;">Semestre Atual: </label></b></td>
+								<td style="width: 75%; text-align: left;"><?php echo $semestre."º Semestre";?></td>
+							</tr>
+							<tr>
+								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="novoSemestre" style="color: #B63D32;">Novo Semestre: </label></b></td>
 								<td style="width: 75%; text-align: left;">
-									<select name="ano" style="width: 70%;">
-									  <option value="default">Selecione o ano:</option>
-									  <option value="2018">2018</option>
-									  <option value="2017">2017</option>
-									  <option value="2016">2016</option>
-									  <option value="2015">2015</option>
-									  <option value="2014">2014</option>
+									<select name="novoSemestre" style="width: 65.5%;">
+									  <option value="default">Selecione o semestre:</option>
+									  <option value="1">1º Semestre</option>
+									  <option value="2">2º Semestre</option>
+									  <option value="3">3º Semestre</option>
+									  <option value="4">4º Semestre</option>
+									  <option value="5">5º Semestre</option>
+									  <option value="6">6º Semestre</option>
+									  <option value="7">7º Semestre</option>
+									  <option value="8">8º Semestre</option>
+									  <option value="9">9º Semestre</option>
+									  <option value="10">10º Semestre</option>
 									</select>
 								</td>
-							</tr>
+							</tr>						
 						</tbody>
 					</table>
 
@@ -64,14 +72,8 @@ $curso = $toolsDAO->findById($_SESSION['curso']);
 							<tr>
 								<td>
 									<br>
-									<input type="submit" value="Clique aqui para Carregar Questões" name="loadQuestoes" style="border: 0px; border-radius:8px; font-weight:bold;
+									<input type="submit" value="Alterar" name="alterar" style="border: 0px; border-radius:8px; font-weight:bold;
 					 				height: 35px; width: 250px; background-color: #3AC74A; margin-top: 10px; color: #FFFFFF;"><br>
-								</td>
-								
-								<td>
-									<br>
-									<input type="button" value="Clique aqui para mudar o Semestre do Aluno" name="alteraAluno" style="border: 0px; border-radius:8px; font-weight:bold;
-					 				height: 35px; width: 300px; background-color: #ec1313; margin-top: 10px; color: #FFFFFF;" onclick="location.href='alterarDadosAluno.php?ra=<?php echo $_GET['ra']; ?>&nomeAluno=<?php echo $_GET['nomeAluno'];?>&curso=<?php echo $curso;?>';"><br>
 								</td>
 							</tr>
 						</tbody>

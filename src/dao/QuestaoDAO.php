@@ -34,9 +34,11 @@ class QuestaoDAO{
 				$query = "SELECT id_opcoes, texto_opcoes FROM `opcoes_questoes` WHERE `id_questao` = ".$questao->getIdQuestao()."";
 				$result = $this->con->query($query);
 				if($result != false){
+					$opcoes = array();
 					foreach ($result as $opcao) {
-						array_push($questao->getOpcoes(), $opcao);
+						array_push($opcoes, $opcao);
 					}
+					$questao->setOpcoes($opcoes);
 					return $questao;
 				}else{
 					return false;
@@ -54,9 +56,9 @@ class QuestaoDAO{
 		
 	}
 		
-	public function insert($idCurso, $ano, $textoquestao, $semestre, $radioOpcoes, $opcao1, $opcao2, $opcao3, $opcao4, $opcao5){
+	public function insert($idCurso, $ano, $textoquestao,$radioOpcoes, $opcao1, $opcao2, $opcao3, $opcao4, $opcao5, $disciplina){
 		$idCurso = $this->con->previneSQLInjection($idCurso);
-		$semestre = $this->con->previneSQLInjection($semestre);
+		$disciplina = $this->con->previneSQLInjection($disciplina);
 		$ano = $this->con->previneSQLInjection($ano);
 		$textoquestao = $this->con->previneSQLInjection($textoquestao);
 		$radioOpcoes = $this->con->previneSQLInjection($radioOpcoes);
@@ -66,8 +68,14 @@ class QuestaoDAO{
 		$opcao4 = $this->con->previneSQLInjection($opcao4);
 		$opcao5 = $this->con->previneSQLInjection($opcao5);
 		
-		$query = "INSERT INTO `questoes`(`id_questoes`, `id_curso`, `texto_questao`, `semestre`, `ano`) 
-				  VALUES (NULL,".$idCurso.",'".$textoquestao."',".$semestre.",".$ano.")";
+		$query = "SELECT cd.semestre FROM `disciplina` d
+					LEFT JOIN curso_has_disciplina cd on cd.disciplina_nome = d.`nome_disciplina`
+					WHERE `id_disciplina` = ".$disciplina."";
+		$result = $this->con->query($query);
+		$semestre = $result[0]['semestre'];
+		
+		$query = "INSERT INTO `questoes`(`id_questoes`, `id_curso`, `id_disciplina`, `texto_questao`, `semestre`, `ano`)
+					VALUES (NULL,".$idCurso.", ".$disciplina.",'".$textoquestao."',".$semestre.",".$ano.")";
 		try {
 			$result = $this->con->prepare($query);
 			if($result){

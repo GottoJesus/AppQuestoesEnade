@@ -1,6 +1,6 @@
 <?php include_once 'dao/QuestaoDAO.php';
 $curso = $_POST['curso'];
-$semestre = $_POST['semestre'];
+$disciplina = $_POST['disciplinas'];
 $ano = $_POST['ano'];
 $textoquestao = $_POST['textoquestao'];
 $radioOpcoes = $_POST['radioOpcoes'];
@@ -13,11 +13,11 @@ $opcao5 = $_POST['opcao5'];
 $questaoDao = new QuestaoDAO();
 
 if($curso == "default" || $ano == "default" || $textoquestao == "" ||$opcao1 == "" ||$opcao2 == "" 
-		||$opcao3 == "" ||$opcao4 == "" || $opcao5 == ""){
+		||$opcao3 == "" ||$opcao4 == "" || $opcao5 == "" || $disciplina == "default"){
 	echo "<script type='text/javascript' lang='javascript'> window.alert('Por favor selecione uma opção válida.');</script>";
 	header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
 }else{
-	$deuCerto = $questaoDao->insert($curso, $ano, $textoquestao, $semestre, $radioOpcoes, $opcao1, $opcao2, $opcao3, $opcao4, $opcao5);
+	$deuCerto = $questaoDao->insert($curso, $ano, $textoquestao, $radioOpcoes, $opcao1, $opcao2, $opcao3, $opcao4, $opcao5, $disciplina);
 	if($deuCerto){
 		unset($_POST['curso']);
 		unset($_POST['semestre']);
@@ -33,10 +33,10 @@ if($curso == "default" || $ano == "default" || $textoquestao == "" ||$opcao1 == 
 
 		
 		echo "<script type='text/javascript' lang='javascript'> window.alert('Questão Inserida com sucesso.');</script>";
-		header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
+		//header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
 	}else{
 		echo "<script type='text/javascript' lang='javascript'> window.alert('Erro no registro da questão no banco.');</script>";
-		header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
+		//header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
 	}
 }
 

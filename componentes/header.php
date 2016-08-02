@@ -24,35 +24,63 @@
         </div>
         <?php }?>
 	</div>
-       
-        <div class="clear"></div>
-        <nav class="box-shadow">
-            <div>
-                <ul class="menu">
-                <?php if(isset($_SESSION['login'])){
+        <?php if(isset($_SESSION['login'])){
                 		if($_SESSION['tipo_usuario'] == 'admin'){?>
-                		<li><a href="cadastrarProfessores.php">Cadastrar Professores</a></li>
-                		<li><a href="cadastrarAlunos.php">Cadastrar Alunos</a></li>
-						<li><a href="cadastrarPerguntas.php">Cadastrar Perguntas</a></li>
+	        <div class="clear"></div>
+	        <nav class="box-shadow">
+	            <div>
+	                <ul class="menu">
+	                	<li><a href="cadastrarProfessores.php">Cadastrar Professores</a></li>
+	                	<li><a href="cadastrarAlunos.php">Cadastrar Alunos</a></li>
 						<li><a href="cadastrarCursos.php">Cadastrar Cursos</a></li>
-<!-- 						<li><a href="cadastrarDisciplinas.php">Cadastrar Disciplinas</a></li> -->
+						<li><a href="cadastrarDisciplinas.php">Cadastrar Disciplinas</a></li>
 						<li><a href="consultarAlunos.php">Consultar Alunos</a></li>
 						<li><a href="resetarSenhas.php">Resetar Senhas</a></li>
-                		<?php }elseif($_SESSION['tipo_usuario'] == 'professor'){?>
-                		<li><a href="cadastrarAlunos.php">Cadastrar Alunos</a></li>
-                    	<li><a href="consultarAlunos.php">Consultar Alunos</a></li>
+					</ul>
+	                <div class="social-icons">
+	                </div>
+	                <div class="clear"></div>
+	            </div>
+	        </nav>
+			<?php }elseif($_SESSION['tipo_usuario'] == 'professor'){?>
+			 <div class="clear"></div>
+	        	<nav class="box-shadow">
+	            <div>
+	                <ul class="menu">
+						<li><a href="cadastrarAlunos.php">Cadastrar Alunos</a></li>
+						<li><a href="consultarAlunos.php">Consultar Alunos</a></li>
 						<li><a href="cadastrarPerguntas.php">Cadastrar Perguntas</a></li>
-                  <?php }else{?>
-                 	<li><a href="verRespostas.php">Verificar Respostas</a></li>
-                    <li><a href="lancarRespostas.php">Responder Questões</a></li>
-                  <?php }?>
-                 <?php }else{?>
-                 	<li><a></a></li>
-                  <?php }?>
-                </ul>
+					</ul>
                 <div class="social-icons">
                 </div>
                 <div class="clear"></div>
             </div>
         </nav>
+	  <?php }else{?>
+	   <div class="clear"></div>
+	        	<nav class="box-shadow">
+	            <div>
+	                <ul class="menu">
+						<li><a href="verRespostas.php">Verificar Respostas</a></li>
+						<li><a href="lancarRespostas.php">Responder Questões</a></li>
+					</ul>
+                <div class="social-icons"></div>
+                <div class="clear"></div>
+            </div>
+        </nav>
+	  <?php }?>
+	 <?php }else{?>
+	 	<div class="clear"></div>
+        <nav class="box-shadow">
+            <div>
+                <ul class="menu">
+					<li><a></a></li>
+					</ul>
+                <div class="social-icons">
+                </div>
+                <div class="clear"></div>
+            </div>
+        </nav>
+	  <?php }?>
+
 </header>    

@@ -10,6 +10,19 @@ include 'src/dao/ToolsDAO.php';
 $toolsDAO = new ToolsDAO();
 $cursos = $toolsDAO->findCursos();
 ?>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+      function busca_disciplinas(){
+          var curso = $('#curso').val();
+          if(curso != false && curso != 'default'){
+            var url = 'busca_disciplinas.php?curso='+curso;
+            $.get(url, function(dataReturn) {
+              $('#linhaDisci').html(dataReturn);
+            });
+          }
+        }
+    </script>
 </head>
 <body>
   <div class="main">
@@ -24,22 +37,31 @@ $cursos = $toolsDAO->findCursos();
 				<form method="post" action="src/cadastrarPerguntas.php">
 					<table style="width: 100%;">
 						<tbody>							
-								<tr>
-									<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="curso" style="color: #B63D32;">Curso: </label></b></td>
-									<td style="width: 75%; text-align: left;">
-										<select name="curso" style="width: 65.5%;">
-										  <option value="default">Selecione o curso:</option>
-										  <?php foreach ($cursos as $curso) {?>
-										  <option value="<?php echo $curso['idCurso'];?>"><?php echo $curso['nome'];?></option>
-										 <?php }?>
-										</select>
-									</td>
-								</tr>
+							<tr>
+								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="curso" style="color: #B63D32;">Curso: </label></b></td>
+								<td style="width: 75%; text-align: left;">
+									<select name="curso" style="width: 65.5%;" onchange="busca_disciplinas();" id="curso">
+									  <option value="default">Selecione o curso:</option>
+									  <?php foreach ($cursos as $curso) {?>
+									  <option value="<?php echo $curso['idCurso'];?>"><?php echo $curso['codigoCurso']." - ".$curso['nome'];?></option>
+									 <?php }?>
+									</select>
+								</td>
+							</tr>
+							<tr id="linhaDisci">
+								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="disciplinas" style="color: #B63D32;">Disciplinas: </label></b></td>
+								<td style="width: 75%; text-align: left;">
+									<select name="disciplinas" style="width: 65.5%;" id="disciplinas">
+									  <option value="default">Selecione a disciplina:</option>
+									</select>
+								</td>
+							</tr>
+							
 							
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="ano" style="color: #B63D32;">Ano: </label></b></td>
 								<td style="width: 75%; text-align: left;">
-									<select name="ano" style="width: 70%;">
+									<select name="ano" style="width: 65.5%;">
 									  <option value="default">Selecione o ano:</option>
 									  <option value="2018">2018</option>
 									  <option value="2017">2017</option>
@@ -49,24 +71,24 @@ $cursos = $toolsDAO->findCursos();
 									</select>
 								</td>
 							</tr>
-							<tr>
-								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="semestre" style="color: #B63D32;">Semestre: </label></b></td>
-								<td style="width: 75%; text-align: left;">
-									<select name="semestre" style="width: 70%;">
-									  <option value="default">Selecione o semestre:</option>
-									  <option value="1">1º Semestre</option>
-									  <option value="2">2º Semestre</option>
-									  <option value="3">3º Semestre</option>
-									  <option value="4">4º Semestre</option>
-									  <option value="5">5º Semestre</option>
-									  <option value="6">6º Semestre</option>
-									  <option value="7">7º Semestre</option>
-									  <option value="8">8º Semestre</option>
-									  <option value="9">9º Semestre</option>
-									  <option value="10">10º Semestre</option>
-									</select>
-								</td>
-							</tr>
+<!-- 							<tr> -->
+<!-- 							<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="semestre" style="color: #B63D32;">Semestre: </label></b></td> -->
+<!-- 								<td style="width: 75%; text-align: left;"> -->
+<!-- 									<select name="semestre" style="width: 70%;"> -->
+<!-- 									  <option value="default">Selecione o semestre:</option> -->
+<!-- 									  <option value="1">1º Semestre</option> -->
+<!-- 									  <option value="2">2º Semestre</option> -->
+<!-- 									  <option value="3">3º Semestre</option> -->
+<!-- 									  <option value="4">4º Semestre</option> -->
+<!-- 									  <option value="5">5º Semestre</option> -->
+<!-- 									  <option value="6">6º Semestre</option> -->
+<!-- 									  <option value="7">7º Semestre</option> -->
+<!-- 									  <option value="8">8º Semestre</option> -->
+<!-- 									  <option value="9">9º Semestre</option> -->
+<!-- 									  <option value="10">10º Semestre</option> -->
+<!-- 									</select> -->
+<!-- 								</td> -->
+<!-- 							</tr> -->
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="textoquestao" style="color: #B63D32;">Digite o Texto da Pergunta: </label></b></td>
 								<td style="width: 75%; text-align: left;">

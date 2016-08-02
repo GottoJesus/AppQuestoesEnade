@@ -25,18 +25,18 @@ $cursos = $toolsDAO->findCursos();
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="curso" style="color: #B63D32;">Curso: </label></b></td>
 								<td style="width: 75%; text-align: left;">
-									<select name="curso" style="width: 70%;">
+									<select name="curso" style="width: 65.5%;">
 									  <option value="default">Selecione o curso:</option>
-									  <?php foreach ($cursos as $curso) { echo $curso['idCurso']; ?>
-									  <option value="<?php echo $curso['idCurso'];?>"><?php echo $curso['nome'];?></option>
+									  <?php foreach ($cursos as $curso) {?>
+									  <option value="<?php echo $curso['idCurso'];?>"><?php echo $curso['codigoCurso']." - ".$curso['nome'];?></option>
 									 <?php }?>
 									</select>
 								</td>
-							</tr>							
+							</tr>						
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="semestre" style="color: #B63D32;">Semestre: </label></b></td>
 								<td style="width: 75%; text-align: left;">
-									<select name="semestre" style="width: 70%;">
+									<select name="semestre" style="width: 65.5%;">
 									  <option value="default">Selecione o semestre:</option>
 									  <option value="1">1º Semestre</option>
 									  <option value="2">2º Semestre</option>

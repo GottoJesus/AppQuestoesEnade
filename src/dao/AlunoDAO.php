@@ -26,7 +26,7 @@ class AlunoDAO{
 		
 		$query = "SELECT a.*, u.nome FROM `aluno` a 
 					LEFT JOIN usuario u on u.id_usuario = a.`usuario_id_usuario`
-					WHERE `curso_id_curso` = ".$curso." and `semestre` = ".$semestre."";
+					WHERE a.`curso_id_curso` = ".$curso." and a.`semestre` = ".$semestre."";
 		try {
 			$result = $this->con->query($query);
 			if($result != false){
@@ -63,8 +63,18 @@ class AlunoDAO{
 		}
 	}
 
-	public function update($object){
-
+	public function update($ra, $semestre){
+		$query = "UPDATE `aluno` SET `semestre`=".$semestre." WHERE `ra` = ".$ra."";
+		try {
+			$result = $this->con->prepare($query);
+			if($result !== false){
+				return true;
+			}else{
+				return false;
+			}
+		} catch (Exception $e) {
+			return false;
+		}
 	}
 
 	public function delete($id){

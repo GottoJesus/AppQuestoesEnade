@@ -1,5 +1,8 @@
-<?php @session_start();
-$listaQuestoes = $_SESSION['$listaQuestoes'];
+<?php include_once 'src/entidades/Questao.php';
+
+@session_start();
+$listaQuestoes = new Questao();
+$listaQuestoes = $_SESSION['listaQuestoes'];
 $count = 1;
 foreach ($listaQuestoes as $questao) {
 	$opcoes = $questao->getOpcoes();
