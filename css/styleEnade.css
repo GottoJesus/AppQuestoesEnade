@@ -1,0 +1,15 @@
+@charset "utf-8";
+.radioColumn {
+	width: 10%;
+	vertical-align:middle;
+	text-align:center;
+}
+.labelColumn {
+	width: 90%;
+	vertical-align:middle;
+	text-align: left;
+}
+.radioRow {
+	width: 100%;
+	padding: 12%;
+}

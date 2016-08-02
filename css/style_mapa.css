@@ -1,0 +1,32 @@
+/*
+	 CSS-Tricks Example
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
+
+* { margin: 0; padding: 0; }
+body { font: 14px verdana, serif; color: #222; }
+
+article, aside, figure, footer, header, hgroup,
+menu, nav, section { display: block; }
+
+#page-wrap { width: 960px; margin: 60px auto; }
+#map_canvas { width: 100%; height: 400px; width: 450px; float: left; position: relative; z-index: 30 !important; }
+
+h10 { margin: 0 0 10px 0; font: bold 32px Helvetica, Arial, Sans-Serif; letter-spacing: -2px; }
+h20 { margin: 0 0 15px 0; font: 12px Helvetica, Arial, Sans-Serif; letter-spacing: -1px; text-shadow: 0 1px 0px rgba(255,255,255,0.3); }
+h30 { margin: 0 0  1px 0; font: bold 14px Helvetica, Arial, Sans-Serif; letter-spacing: -1px;color: #417b39; }
+
+
+#locations { list-style: none; width: 150px; float: left;  }
+#locations li0 { padding: 10px; width: 800px; float: left; position: relative; z-index: 20; }
+#locations li0:hover, #locations li.hover { background: #ebebec url(../images/shadow.png) 18px 0 repeat-y; }
+#locations li0:hover h3, #locations li.hover h3 { color: green; text-shadow: 0 1px 0px rgba(255,255,255,0.3); }
+
+
+#content { width: 300px; }
+
+#more-info { width: 270px; float: right; background: #ebebec; padding: 0px; height: 400px; }
+#more-info * { position: relative; z-index: 40; }
+#more-info > div { background: #ffff; -moz-box-shadow: 0 0 14px rgba(70,49,1,0.5); -webkit-box-shadow: 0 0 14px rgba(70,49,1,0.5); padding: 20px; height: 360px; }
+.longdesc { display: none; }
