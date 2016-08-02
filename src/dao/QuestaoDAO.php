@@ -23,26 +23,30 @@ class QuestaoDAO{
 				WHERE `id_curso` = ".$curso." and `semestre` = ".$semestre." and `ano` = ".$ano."";
 		
 		try {
-			$result = $this->con->query($query);
-			if($result != false){
-				$questao = new Questao();
-				$questao->setIdDisciplina($result[0]['id_disciplina']);
-				$questao->setIdQuestao($result[0]['id_questoes']);
-				$questao->setTextoPergunta($result[0]['texto_questao']);
-				$questao->setSemestre($result[0]['semestre']);
-				
-				$query = "SELECT id_opcoes, texto_opcoes FROM `opcoes_questoes` WHERE `id_questao` = ".$questao->getIdQuestao()."";
-				$result = $this->con->query($query);
-				if($result != false){
-					$opcoes = array();
-					foreach ($result as $opcao) {
-						array_push($opcoes, $opcao);
-					}
-					$questao->setOpcoes($opcoes);
-					return $questao;
-				}else{
-					return false;
-				}	
+			$results = $this->con->query($query);
+			if($results != false){
+				$listaQuestao = array();
+				foreach ($results as $result) {
+					$questao = array();
+					$questao['id_disciplina'] = $result['id_disciplina'];
+					$questao['id_questoes'] = $result['id_questoes'];
+					$questao['texto_questao'] = $result['texto_questao'];
+					$questao['semestre'] = $result['semestre'];
+					
+					$query = "SELECT id_opcoes, texto_opcoes FROM `opcoes_questoes` WHERE `id_questao` = ".$questao['id_questoes']."";
+					$result = $this->con->query($query);
+					if($result != false){
+						$opcoes = array();
+						foreach ($result as $opcao) {
+							array_push($opcoes, $opcao);
+						}
+						$questao['opcoes'] = $opcoes;
+						array_push($listaQuestao, $questao);
+					}else{
+						return false;
+					}	
+				}
+				return $listaQuestao;
 			}else{
 				return false;
 			}

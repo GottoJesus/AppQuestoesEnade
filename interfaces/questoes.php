@@ -1,24 +1,21 @@
-<?php include_once 'src/entidades/Questao.php';
-
-@session_start();
-$listaQuestoes = new Questao();
+<?php @session_start();
 $listaQuestoes = $_SESSION['listaQuestoes'];
 $count = 1;
 foreach ($listaQuestoes as $questao) {
-	$opcoes = $questao->getOpcoes();
+	$opcoes = $questao['opcoes'];
 	?>
-<form method="post" action="src/lancarRespostas.php">
+<form method="post" action="src/lancarRespostas.php" style="margin-bottom: 5%;">
 	<div class="questao" id="questao" style="width: 100%;">
 	  <div class="textoPergunta" id="textoPergunta"></div>
 	    <div class="opcoesPergunta" id="opcoesPergunta"> 
-	      <table style="width:100%; background-color: #FFFFFF;">
+	      <table style="width:100%; background-color: #FFFFFF; border: 1px #babfc7 solid;">
 	      	<thead>
 	      		<tr class="radioRow">
 			       <td class="radioColumn">
 			           <p style="color:#ec1313;"><b><?php echo $count;?>-</b></p>
 			        </td>
 			        <td class="labelColumn">
-			           <p align="left"><b><?php echo $questao->getTextoPergunta();?></b></p>
+			           <p align="left"><b><?php echo $questao['texto_questao'];?></b></p>
 			         </td>
 			        </tr>
 	      	</thead>
@@ -26,7 +23,7 @@ foreach ($listaQuestoes as $questao) {
 		      <?php foreach ($opcoes as $opcao) {?>
 			        <tr class="radioRow">
 			          <td class="radioColumn">
-			            <input type="radio" name="radioOpcoes" value="<?php echo $questao->getIdQuestao().'_'.$opcao['id_opcoes'];?>" id="radioOpcoes_1" >
+			            <input type="radio" name="radioOpcoes" value="<?php echo $questao['id_questoes'].'_'.$opcao['id_opcoes'];?>" id="radioOpcoes_1" >
 			           </td>
 			           <td class="labelColumn">
 			            <label><?php echo $opcao['texto_opcoes'];?><br>
@@ -45,4 +42,6 @@ foreach ($listaQuestoes as $questao) {
 	    </div>
 	</div>
 </form>
-<?php }?>
+<?php 
+$count++;
+}?>
