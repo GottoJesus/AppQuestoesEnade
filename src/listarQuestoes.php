@@ -1,4 +1,5 @@
 <?php include_once 'dao/QuestaoDAO.php';
+@session_start();
 $ano = $_POST['ano'];
 $semestre = $_SESSION['semestre'];
 $curso = $_SESSION['curso'];

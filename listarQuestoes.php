@@ -47,11 +47,11 @@ $curso = $toolsDAO->findById($_SESSION['curso']);
 								<td style="width: 75%; text-align: left;">
 									<select name="ano" style="width: 70%;">
 									  <option value="default">Selecione o ano:</option>
-									  <option value="2016">2018</option>
-									  <option value="2015">2017</option>
-									  <option value="2014">2016</option>
-									  <option value="2013">2015</option>
-									  <option value="2012">2014</option>
+									  <option value="2018">2018</option>
+									  <option value="2017">2017</option>
+									  <option value="2016">2016</option>
+									  <option value="2015">2015</option>
+									  <option value="2014">2014</option>
 									</select>
 								</td>
 							</tr>
