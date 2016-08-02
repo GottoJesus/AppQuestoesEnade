@@ -150,9 +150,9 @@ class QuestaoDAO{
 	
 	}
 	
-	public function verificarResposta($idQuestao, $idOpcao, $raAluno){
+	public function verificarResposta($idQuestao, $raAluno){
 		$query = "SELECT * FROM `opcoes_questoes_has_questoes` 
-				WHERE `opcoes_questoes_id_opcoes` = ".$idOpcao." and `questoes_id_questoes` = ".$idQuestao." and `ra_aluno` = ".$raAluno."";
+				WHERE `questoes_id_questoes` = ".$idQuestao." and `ra_aluno` = ".$raAluno."";
 		try {
 			$result = $this->con->query($query);
 			if($result != false){
@@ -171,10 +171,9 @@ class QuestaoDAO{
 		$query = "INSERT INTO `opcoes_questoes_has_questoes`(`opcoes_questoes_id_opcoes`, `questoes_id_questoes`, `ra_aluno`) 
 					VALUES (".$idOpcao.",".$idQuestao.",".$raAluno.")";
 		try {
-			$result = $this->con->query($query);
-			if($result != false){ 
-				$id = $this->con->con->lastInsertId();
-				return $id;
+			$result = $this->con->prepare($query);
+			if($result !== false){ 
+				return true;
 			}else{
 				return false;
 			}

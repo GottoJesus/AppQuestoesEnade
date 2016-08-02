@@ -1,12 +1,10 @@
 <?php include_once 'dao/UsuarioDAO.php';
+include_once 'dao/AlunoDAO.php';
 @session_start();
 
 $login = $_POST['login'];
 $senha = $_POST['senha'];
-
-
 $usuarioDAO = new UsuarioDAO();
-
 $usuario = $usuarioDAO->findByLogin($login);
 
 if($usuario != false){
@@ -17,6 +15,15 @@ if($usuario != false){
 		$_SESSION['nome'] = $usuario->getNomeUsuario();
 		$_SESSION['tipo_usuario'] = $usuario->getTipoUsuario();
 		
+		if($usuario->getTipoUsuario() == 'aluno'){
+			$alunoDAO = new AlunoDAO();
+			$dadosAluno = $alunoDAO->findDadosByRA($login);
+			$_SESSION['raAluno'] = $login;
+			$_SESSION['curso'] = $dadosAluno['idCurso'];
+			$_SESSION['semestre'] = $dadosAluno['semestre'];
+			$_SESSION['nomeCurso'] = $dadosAluno['nomeCurso'];
+			$_SESSION['nomeAluno'] = $usuario->getNomeUsuario();
+		}
 		if($senha == $login){
 			//echo '<script type="text/javascript" lang="javascript"> window.alert("Login feito com sucesso. Bem-vindo '.$usuario->getNomeUsuario().'.");</script>';
 			header("Location: http://localhost/AppQuestoesEnade/alterarSenha.php");

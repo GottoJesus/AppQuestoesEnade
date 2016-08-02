@@ -1,6 +1,6 @@
 <?php
-include_once 'entidades/Aluno.php';
-include_once 'ferramentas/ConexaoBD.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/AppQuestoesEnade/src/entidades/Aluno.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/AppQuestoesEnade/src/ferramentas/ConexaoBD.php';
 
 
 class AlunoDAO{
@@ -16,8 +16,25 @@ class AlunoDAO{
 
 	}
 
-	public function findById($id){
-
+	public function findDadosByRA($ra){
+		$query = "SELECT a.*, c.`nome` FROM `aluno` a 
+					LEFT JOIN curso c on c.idCurso = a.`curso_id_curso`
+					WHERE `ra` = ".$ra."";
+		try {
+			$result = $this->con->query($query);
+			if($result != false){
+				$dados = array();
+				$dados['idCurso'] = $result[0]['curso_id_curso'];
+				$dados['semestre'] = $result[0]['semestre'];
+				$dados['nomeCurso'] = $result[0]['nome'];	
+				return $dados;
+			}else{
+				return false;
+			}
+		} catch (Exception $e) {
+			return false;
+		}
+		
 	}
 
 	public function find($curso, $semestre){
@@ -77,6 +94,46 @@ class AlunoDAO{
 		}
 	}
 
+	public function getQuestoesResp($ra, $ano, $semestre){
+		$query = "SELECT q.texto_questao, oq.texto_opcoes, oq.opcao_correta, q.id_questoes 
+				FROM `opcoes_questoes_has_questoes` oqq 
+				Left join opcoes_questoes oq on oq.id_opcoes = oqq.`opcoes_questoes_id_opcoes` 
+				Left join questoes q on oqq.`questoes_id_questoes` = q.id_questoes 
+				WHERE oqq.`ra_aluno` = ".$ra." and q.ano = ".$ano." and q.semestre = ".$semestre."";
+		try {
+			$results = $this->con->query($query);
+			if($results != false){
+				$listaResp = array();
+				foreach ($results as $result) {
+					$resposta = array();
+					$resposta['id_questoes'] = $result['id_questoes'];
+					$resposta['texto_questao'] = $result['texto_questao'];
+					$resposta['opcaoResp'] = $result['texto_opcoes'];
+					$resposta['opcao_eh_correta'] = $result['opcao_correta'];
+					
+					if($resposta['opcao_eh_correta'] == 1){
+						$resposta['opcaoCorreta'] = $resposta['opcaoResp'];
+					}else{
+						$query = "SELECT `texto_opcoes` FROM `opcoes_questoes` 
+								WHERE `id_questao` = ".$resposta['id_questoes']." and `opcao_correta` = 1";
+						$result2 = $this->con->query($query);
+						if($result2 != false){
+							$resposta['opcaoCorreta'] = $result2[0]['texto_opcoes'];
+						}else{
+							return false;
+						}
+					}
+					array_push($listaResp, $resposta);
+				}
+				return $listaResp;
+			}else{
+				return false;
+			}
+		} catch (Exception $e) {
+			return false;
+		}
+	}
+	
 	public function delete($id){
 
 	}

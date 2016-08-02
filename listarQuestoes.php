@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Listar Alunos</title>
+    <title>Listar Questões</title>
 <?php include 'componentes/style.php';
 include 'src/dao/ToolsDAO.php';
 @session_start();
 
-unset($_SESSION['arrAluno']);
-$raAluno = $_GET['ra'];
-$_SESSION['raAluno'] = $raAluno;
-$_SESSION['nomeAluno'] = $_GET['nomeAluno'];
+if($_SESSION['tipo_usuario'] != 'aluno'){
+	unset($_SESSION['arrAluno']);
+	$raAluno = $_GET['ra'];
+	$_SESSION['raAluno'] = $raAluno;
+	$_SESSION['nomeAluno'] = $_GET['nomeAluno'];
+	
+	$toolsDAO = new ToolsDAO();
+	$curso = $toolsDAO->findById($_SESSION['curso']);
+}else{
+	$curso = $_SESSION['nomeCurso'];
+}
 
-$toolsDAO = new ToolsDAO();
 
-$curso = $toolsDAO->findById($_SESSION['curso']);
 ?>
 </head>
 <body>
@@ -32,12 +37,12 @@ $curso = $toolsDAO->findById($_SESSION['curso']);
 						
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label style="color: #B63D32;">R.A. do Aluno: </label></b></td>
-								<td style="width: 75%; text-align: left;"><b><?php echo $_GET['ra'];?></b></td>
+								<td style="width: 75%; text-align: left;"><b><?php echo $_SESSION['raAluno'];?></b></td>
 							</tr>
 						
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label style="color: #B63D32;">Nome do Aluno: </label></b></td>
-								<td style="width: 75%; text-align: left;"><?php echo $_GET['nomeAluno'];?></td>
+								<td style="width: 75%; text-align: left;"><?php echo $_SESSION['nomeAluno'];?></td>
 							</tr>
 							<tr>
 								<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label style="color: #B63D32;">Curso: </label></b></td>
@@ -67,12 +72,13 @@ $curso = $toolsDAO->findById($_SESSION['curso']);
 									<input type="submit" value="Clique aqui para Carregar Questões" name="loadQuestoes" style="border: 0px; border-radius:8px; font-weight:bold;
 					 				height: 35px; width: 250px; background-color: #3AC74A; margin-top: 10px; color: #FFFFFF;"><br>
 								</td>
-								
+								<?php if($_SESSION['tipo_usuario'] != 'aluno'){?>
 								<td>
 									<br>
 									<input type="button" value="Clique aqui para mudar o Semestre do Aluno" name="alteraAluno" style="border: 0px; border-radius:8px; font-weight:bold;
 					 				height: 35px; width: 300px; background-color: #ec1313; margin-top: 10px; color: #FFFFFF;" onclick="location.href='alterarDadosAluno.php?ra=<?php echo $_GET['ra']; ?>&nomeAluno=<?php echo $_GET['nomeAluno'];?>&curso=<?php echo $curso;?>';"><br>
 								</td>
+								<?php }?>
 							</tr>
 						</tbody>
 					</table>

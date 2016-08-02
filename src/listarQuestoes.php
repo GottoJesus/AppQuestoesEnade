@@ -15,6 +15,7 @@ if($ano == "default"){
 	$listaQuestoes = $questaoDAO->find($curso, $ano, $semestre);
 	if($listaQuestoes){
 		$_SESSION['listaQuestoes'] = $listaQuestoes;
+		$_SESSION['ano'] = $ano;
 		header("Location: http://localhost/AppQuestoesEnade/lancarRespostas.php");
 	}else{
 		echo "<script> window.alert('Não há questões para estes parâmetros.');</script>";
