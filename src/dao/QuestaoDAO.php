@@ -1,4 +1,5 @@
 <?php include_once 'ferramentas/ConexaoBD.php';
+include_once 'entidades/Questao.php';
 
 class QuestaoDAO{	
 	protected $con;

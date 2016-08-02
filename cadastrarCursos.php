@@ -20,6 +20,10 @@
 					<table style="width: 100%;">
 							<tbody>
 								<tr>
+									<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="codigoCurso" style="color: #B63D32;">Código do Curso: </label></b></td>
+									<td style="width: 75%; text-align: left;"><input type="text" name="codigoCurso" size="15" value="" style="width: 65%;"></td>
+								</tr>	
+								<tr>
 									<td style="width: 25%; text-align: right; padding-right: 5px;"><b><label for="nomeCurso" style="color: #B63D32;">Nome do Curso: </label></b></td>
 									<td style="width: 75%; text-align: left;"><input type="text" name="nomeCurso" size="15" value="" style="width: 65%;"></td>
 								</tr>							

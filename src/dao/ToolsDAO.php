@@ -61,9 +61,9 @@ class ToolsDAO{
 	}
 	
 
-	public function insertCurso($nomeCurso) {
+	public function insertCurso($nomeCurso, $codigoCurso) {
 		$nomeCurso = $this->con->previneSQLInjection($nomeCurso);
-		$query = "INSERT INTO `curso`(`idCurso`, `nome`) VALUES (NULL,'".$nomeCurso."')";
+		$query = "INSERT INTO `curso`(`idCurso`, `nome`, `codigoCurso`) VALUES (NULL,'".$nomeCurso."', ".$codigoCurso.")";
 
 		try {
 			$result = $this->con->prepare($query);
@@ -77,8 +77,32 @@ class ToolsDAO{
 		}
 	}
 	
-	public function insertDisciplina($idCurso, $nomeDisciplina) {
-		// TODO: Auto-generated method stub
+	public function insertDisciplina($idCurso, $nomeDisciplina, $semestre, $codigoDisciplina) {
+		$idCurso = $this->con->previneSQLInjection($idCurso);
+		$nomeDisciplina = $this->con->previneSQLInjection($nomeDisciplina);
+		$codigoDisciplina = $this->con->previneSQLInjection($codigoDisciplina);
+		$semestre = $this->con->previneSQLInjection($semestre);
+		
+		$query = "INSERT INTO `disciplina`(`id_disciplina`, `nome_disciplina`,`codigo_disciplina`,  `questoes_id_questoes`) 
+				  VALUES (NULL,'".$nomeDisciplina."',".$codigoDisciplina.",NULL)";
+
+		try {
+			$result = $this->con->prepare($query);
+			if($result != false){
+				$query = "INSERT INTO `curso_has_disciplina`(`curso_idCurso`, `disciplina_nome`, `semestre`) 
+						  VALUES (".$idCurso.",'".$nomeDisciplina."',".$semestre.")";
+				$result = $this->con->prepare($query);
+				if($result !== false){
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				return false;
+			}
+		} catch (Exception $e) {
+			return false;
+		}
 	
 	}
 
