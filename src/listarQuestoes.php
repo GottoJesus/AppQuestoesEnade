@@ -8,8 +8,12 @@ $curso = $_SESSION['curso'];
 $questaoDAO = new QuestaoDAO();
 
 if($ano == "default"){
-	echo "<script> window.alert('Por favor selecione uma opção válida.');</script>";
-	header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
+	if($_SESSION['tipo_usuario'] == 'aluno'){
+		echo '<script> window.alert("Por favor selecione uma opção válida."); window.location.href="http://localhost/AppQuestoesEnade/listarQuestoes.php";</script>';
+	}else{
+		echo '<script> window.alert("Por favor selecione uma opção válida."); window.location.href="http://localhost/AppQuestoesEnade/consultarAlunos.php";</script>';
+	}
+	
 }else{
 	
 	$listaQuestoes = $questaoDAO->find($curso, $ano, $semestre);
@@ -18,8 +22,12 @@ if($ano == "default"){
 		$_SESSION['ano'] = $ano;
 		header("Location: http://localhost/AppQuestoesEnade/lancarRespostas.php");
 	}else{
-		echo "<script> window.alert('Não há questões para estes parâmetros.');</script>";
-		header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
+		if($_SESSION['tipo_usuario'] == 'aluno'){
+			echo '<script> window.alert("Por favor selecione uma opção válida."); window.location.href="http://localhost/AppQuestoesEnade/listarQuestoes.php";</script>';
+		}else{
+			echo '<script> window.alert("Não há questões para estes parâmetros."); window.location.href="http://localhost/AppQuestoesEnade/consultarAlunos.php";</script>';
+		}
+		
 	}
 }
 

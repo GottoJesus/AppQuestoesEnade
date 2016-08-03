@@ -14,8 +14,7 @@ $questaoDao = new QuestaoDAO();
 
 if($curso == "default" || $ano == "default" || $textoquestao == "" ||$opcao1 == "" ||$opcao2 == "" 
 		||$opcao3 == "" ||$opcao4 == "" || $opcao5 == "" || $disciplina == "default"){
-	echo "<script type='text/javascript' lang='javascript'> window.alert('Por favor selecione uma opção válida.');</script>";
-	header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
+	echo '<script> window.alert("Por favor selecione uma opção válida.");  window.location.href="http://localhost/AppQuestoesEnade/cadastrarPerguntas.php";</script>';
 }else{
 	$deuCerto = $questaoDao->insert($curso, $ano, $textoquestao, $radioOpcoes, $opcao1, $opcao2, $opcao3, $opcao4, $opcao5, $disciplina);
 	if($deuCerto){
@@ -31,12 +30,9 @@ if($curso == "default" || $ano == "default" || $textoquestao == "" ||$opcao1 == 
 		unset($_POST['opcao4']);
 		unset($_POST['opcao5']);
 
-		
-		echo "<script type='text/javascript' lang='javascript'> window.alert('Questão Inserida com sucesso.');</script>";
-		//header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
+		echo '<script> window.alert("Questão Inserida com sucesso.");  window.location.href="http://localhost/AppQuestoesEnade/cadastrarPerguntas.php";</script>';
 	}else{
-		echo "<script type='text/javascript' lang='javascript'> window.alert('Erro no registro da questão no banco.');</script>";
-		//header("Location: http://localhost/AppQuestoesEnade/cadastrarPerguntas.php");
+		echo '<script> window.alert("Erro no registro da questão no banco.");  window.location.href="http://localhost/AppQuestoesEnade/cadastrarPerguntas.php";</script>';
 	}
 }
 

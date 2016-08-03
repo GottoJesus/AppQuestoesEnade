@@ -25,21 +25,19 @@ if($usuario != false){
 			$_SESSION['nomeAluno'] = $usuario->getNomeUsuario();
 		}
 		if($senha == $login){
-			//echo '<script type="text/javascript" lang="javascript"> window.alert("Login feito com sucesso. Bem-vindo '.$usuario->getNomeUsuario().'.");</script>';
+			//echo '<script type="javascript" >alert("Login feito com sucesso. Bem-vindo '.$usuario->getNomeUsuario().'.");</script>';
 			header("Location: http://localhost/AppQuestoesEnade/alterarSenha.php");
 		}else{
-			//echo '<script type="text/javascript" lang="javascript"> window.alert("Login feito com sucesso. Bem-vindo '.$usuario->getNomeUsuario().'.");</script>';
+			//echo '<script type="javascript" >alert("Login feito com sucesso. Bem-vindo '.$usuario->getNomeUsuario().'.");</script>';
 			header("Location: http://localhost/AppQuestoesEnade/index.php");
 		}
 		
 		
 	}else{
-		echo '<script type="text/javascript" lang="javascript"> window.alert("Usuario ou senha invalidos!!!");</script>';
-		header("Location: http://localhost/AppQuestoesEnade/entrar.php");
+		echo '<script> window.alert("Usuario ou senha invalidos!!!"); window.location.href="http://localhost/AppQuestoesEnade/entrar.php";</script>';
 	}
 }else{
-	echo '<script type="text/javascript" lang="javascript"> window.alert("Usuario ou senha invalidos!!!");</script>';
-	header("Location: http://localhost/AppQuestoesEnade/entrar.php");
+	echo '<script> window.alert("Usuario ou senha invalidos!!!"); window.location.href="http://localhost/AppQuestoesEnade/entrar.php";</script>';
 }
 
 ?>

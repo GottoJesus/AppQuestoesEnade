@@ -6,8 +6,7 @@ $semestre = $_POST['semestre'];
 $alunoDAO = new AlunoDAO();
 
 if($curso == "default" || $semestre == "default" ){
-	echo "<script type='text/javascript' lang='javascript'> window.alert('Por favor selecione uma opção válida.');</script>";
-	header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
+	echo '<script> window.alert("Por favor selecione uma opção válida."); window.location.href="http://localhost/AppQuestoesEnade/consultarAlunos.php";</script>';
 }else{
 	$arrAluno = $alunoDAO->find($curso, $semestre);
 	
@@ -17,7 +16,6 @@ if($curso == "default" || $semestre == "default" ){
 		$_SESSION['curso'] = $curso;
 		header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
 	}else{
-		echo "<script type='text/javascript' lang='javascript'> window.alert('Não há alunos para estes parâmetros.');</script>";
-		header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
+		echo '<script> window.alert("Não há alunos para estes parâmetros."); window.location.href="http://localhost/AppQuestoesEnade/consultarAlunos.php";</script>';
 	}
 }

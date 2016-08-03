@@ -7,18 +7,15 @@ $novoSemestre = $_POST['novoSemestre'];
 
 
 if($novoSemestre == "default"){
-	echo "<script type='text/javascript' lang='javascript'> window.alert('Por favor selecione uma opção válida.');</script>";
-	header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
+	echo '<script> window.alert("Por favor selecione uma opção válida."); window.location.href="http://localhost/AppQuestoesEnade/consultarAlunos.php";</script>';
 }else{
 
 	$alunoDAO = new AlunoDAO();
 	$deuCerto = $alunoDAO->update($raAluno, $novoSemestre);
 	if($deuCerto){
-		echo "<script type='text/javascript' lang='javascript'> window.alert('Semestre do Aluno alterado com sucesso.');</script>";
-		header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
+		echo '<script> window.alert("Semestre do Aluno alterado com sucesso."); window.location.href="http://localhost/AppQuestoesEnade/consultarAlunos.php";</script>';
 	}else{
-		echo "<script type='text/javascript' lang='javascript'> window.alert('Erro na alteração do Semestre do Aluno.');</script>";
-		header("Location: http://localhost/AppQuestoesEnade/consultarAlunos.php");
+		echo '<script> window.alert("Erro na alteração do Semestre do Aluno."); window.location.href="http://localhost/AppQuestoesEnade/consultarAlunos.php";</script>';
 	}
 }
 

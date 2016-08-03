@@ -6,9 +6,7 @@ $usuarioDAO = new UsuarioDAO();
 $deuCerto = $usuarioDAO->update($codigo, $codigo);
 
 if($deuCerto != false){
-	echo '<script type="text/javascript" lang="javascript"> window.alert("Senha voltou a configuração padrão!!!");</script>';
-	header("Location: http://localhost/AppQuestoesEnade/resetarSenhas.php");
+	echo '<script> window.alert("Senha voltou a configuração padrão!!!"); window.location.href="http://localhost/AppQuestoesEnade/resetarSenhas.php";</script>';
 }else{
-	echo '<script type="text/javascript" lang="javascript"> window.alert("Erro na alteração da Senha!!!");</script>';
-	header("Location: http://localhost/AppQuestoesEnade/resetarSenhas.php");
+	echo '<script> window.alert("Erro na alteração da Senha!!!"); window.location.href="http://localhost/AppQuestoesEnade/resetarSenhas.php";</script>';
 }

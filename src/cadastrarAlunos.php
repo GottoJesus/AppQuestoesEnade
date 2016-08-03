@@ -6,15 +6,13 @@ $curso = $_POST['curso'];
 $semestre = $_POST['semestre'];
 
 if($curso == "default" || $semestre == "default"){
-	echo "<script type='text/javascript' lang='javascript'> window.alert('Por favor selecione uma opção válida.');</script>";
-	header("Location: http://localhost/AppQuestoesEnade/cadastrarAlunos.php");
+	echo '<script> window.alert("Por favor selecione uma opção válida."); window.location.href="http://localhost/AppQuestoesEnade/cadastrarAlunos.php";</script>';
 }else{
 	$usuarioDAO = new UsuarioDAO();
 	$usuario = $usuarioDAO->findByLogin($raAluno);
 	
 	if($usuario != false){
-		echo '<script type="text/javascript" lang="javascript"> window.alert("Atenção, aluno já cadastrado!!!");</script>';
-		header("Location: http://localhost/AppQuestoesEnade/cadastrarAlunos.php");
+		echo '<script> window.alert("Atenção, aluno já cadastrado!!!"); window.location.href="http://localhost/AppQuestoesEnade/cadastrarAlunos.php";</script>';
 	}else{
 	
 		$usuario = new Usuario();
@@ -26,11 +24,9 @@ if($curso == "default" || $semestre == "default"){
 		$aluno = $usuarioDAO->insert($usuario, $curso, $semestre);
 	
 		if($aluno != false){
-			echo '<script type="text/javascript" lang="javascript"> window.alert("Aluno cadastrado com sucesso!!!");</script>';
-			header("Location: http://localhost/AppQuestoesEnade/cadastrarAlunos.php");
+			echo '<script> window.alert("Aluno cadastrado com sucesso!!!"); window.location.href="http://localhost/AppQuestoesEnade/cadastrarAlunos.php";</script>';
 		}else{
-			echo '<script type="text/javascript" lang="javascript"> window.alert("Erro no cadastro do aluno!!!");</script>';
-			header("Location: http://localhost/AppQuestoesEnade/cadastrarAlunos.php");
+			echo '<script> window.alert("Erro no cadastro do aluno!!!"); window.location.href="http://localhost/AppQuestoesEnade/cadastrarAlunos.php";</script>';
 		}
 	}
 }

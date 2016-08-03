@@ -3,13 +3,10 @@
 $novaSenha = $_POST['novaSenha'];
 
 $usuarioDAO = new UsuarioDAO();
-
 $deuCerto = $usuarioDAO->update($novaSenha, $_SESSION['login']);
 
 if($deuCerto != false){
-	echo '<script type="text/javascript" lang="javascript"> window.alert("Senha Alterada com Sucesso!!!");</script>';
-	header("Location: http://localhost/AppQuestoesEnade/index.php");
+	echo '<script> window.alert("Senha Alterada com Sucesso!!!"); window.location.href="http://localhost/AppQuestoesEnade/index.php";</script>';;
 }else{
-	echo '<script type="text/javascript" lang="javascript"> window.alert("Erro na alteração da Senha!!!");</script>';
-	//header("Location: http://localhost/AppQuestoesEnade/alterarSenha.php");
+	echo '<script> window.alert("Erro na alteração da Senha!!!"); window.location.href="http://localhost/AppQuestoesEnade/alterarSenha.php";</script>';
 }
