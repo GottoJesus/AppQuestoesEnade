@@ -30,10 +30,15 @@
 	        <nav class="box-shadow">
 	            <div>
 	                <ul class="menu">
-	                	<li><a href="cadastrarProfessores.php">Cadastrar Professores</a></li>
-	                	<li><a href="cadastrarAlunos.php">Cadastrar Alunos</a></li>
-						<li><a href="cadastrarCursos.php">Cadastrar Cursos</a></li>
-						<li><a href="cadastrarDisciplinas.php">Cadastrar Disciplinas</a></li>
+	                	<li class="dropdown">
+	                		<a href="#" class="dropbtn">Cadastrar</a>
+		                	<div class="dropdown-content">
+								<a href="cadastrarProfessores.php" style="padding:6px 13px 6px 13px;">Cadastrar Professores</a>
+								<a href="cadastrarAlunos.php" style="padding:6px 13px 6px 13px;">Cadastrar Alunos</a>
+								<a href="cadastrarCursos.php" style="padding:6px 13px 6px 13px;">Cadastrar Cursos</a>
+								<a href="cadastrarDisciplinas.php" style="padding:6px 13px 6px 13px;">Cadastrar Disciplinas</a>
+						    </div>
+	                	</li>
 						<li><a href="consultarAlunos.php">Consultar Alunos</a></li>
 						<li><a href="resetarSenhas.php">Resetar Senhas</a></li>
 					</ul>
